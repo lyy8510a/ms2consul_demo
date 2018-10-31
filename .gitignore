@@ -1,0 +1,8 @@
+workspace.xml
+.idea
+*__pycache__*
+/venv
+/logs
+/doc
+/uploads
+/build
