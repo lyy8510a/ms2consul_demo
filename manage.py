@@ -3,7 +3,7 @@
 """
 Created by liaoyangyang1 on 2018/8/21 下午3:40.
 """
-
+import platform
 from flask_script import Manager
 from apps import create_app, db
 from flask_migrate import Migrate
@@ -24,15 +24,13 @@ def runserver():  # 第二课新增
     Recreates a local database. You probably should not use this on
     production.
     """
-    try:
-
-        # 获取根目录config.py的配置项
+    sysstr = platform.system()
+    if (sysstr == "Windows"):
+        app.run(host=app.config['HOST'], port=app.config['PORT'])
         register_consul()
+    else:
         start_service('gunicorn')
-
-
-    except Exception as e:
-        raise e
+        register_consul()
 
 
 @manager.command
